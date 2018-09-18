@@ -79,8 +79,11 @@ func walkDir(dir string) {
 	defer wg.Done()
 	i := 1
 	visit := func(path string, f os.FileInfo, err error) error {
-		if strings.Contains(path, ignore) {
-			return nil
+		ignoreList := strings.Split(ignore, ",")
+		for _, i := range ignoreList {
+			if strings.Contains(path, strings.TrimSpace(i)) {
+				return nil
+			}
 		}
 		filesSync.Lock()
 		filesSync.files[i] = file{ID: i, Path: path, Size: f.Size()}
@@ -151,7 +154,7 @@ func generateCLI(selection []file) {
 
 	// Request input
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Println("Commands: cd <PATH> | delete <ID> | open <ID> | path <ID> | more <NUMBER> | exit")
+	fmt.Println("Commands: cd <PATH> | delete <ID> | open <ID> | more <NUMBER> | exit")
 	t, _ := reader.ReadString('\n')
 	te := strings.Split(t, "\n")
 	text := te[0]
@@ -182,11 +185,6 @@ func generateCLI(selection []file) {
 			// Open file
 			if command == "open" {
 				openFile(selectedFile.Path)
-			}
-
-			// Show full path
-			if command == "path" {
-				cliStatus = selectedFile.Path
 			}
 
 			// Show more results
