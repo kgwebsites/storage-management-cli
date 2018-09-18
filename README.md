@@ -20,10 +20,12 @@ Upon inital execution of the file, you can pass in these arguments:
 $./storage-management-cli -root /your/path/to/analyze
 ```
 
-`ignore` - Insert a comma seperated list of words to ignore in the search of files and directories
+`ignore` - A comma seperated list of words to ignore in the search of files and directories. If you use more than one, make sure to wrap them in quotes
 
 ```bash
-$./storage-management-cli -i .git, node_modules
+$./storage-management-cli -i .git
+OR
+$./storage-management-cli -i ".git, node_modules"
 ```
 
 `resultCount` - By default the tool shows the top 10 results. Use the `resultCount` flag to define a custom # of results.

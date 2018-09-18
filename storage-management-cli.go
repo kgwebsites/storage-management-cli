@@ -62,7 +62,6 @@ func main() {
 	for cliActive {
 		// Get the CLI selection
 		selection := cliSelection()
-
 		// Generate CLI
 		generateCLI(selection)
 	}
@@ -79,10 +78,12 @@ func walkDir(dir string) {
 	defer wg.Done()
 	i := 1
 	visit := func(path string, f os.FileInfo, err error) error {
-		ignoreList := strings.Split(ignore, ",")
-		for _, i := range ignoreList {
-			if strings.Contains(path, strings.TrimSpace(i)) {
-				return nil
+		if len(ignore) > 0 {
+			ignoreList := strings.Split(ignore, ",")
+			for _, i := range ignoreList {
+				if strings.Contains(path, strings.TrimSpace(i)) {
+					return nil
+				}
 			}
 		}
 		filesSync.Lock()
