@@ -37,10 +37,15 @@ $./storage-management-cli -resultCount 25
 ## Usage
 
 Once you fire up the executable, you can enter any of the commands:
+
 `cd <PATH>` - Changes the directory to the string passed in
+
 `delete <ID>` - Deletes the path indicated by the ID shown in the table above
+
 `open <ID>` - Opens the file explorer of the path ID specified. If the path is a file, it opens the parent directory.
+
 `more <Number>` - Changes the amount of results that are shown in the table
+
 `exit` - Exits the CLI
 
 ## TODO
