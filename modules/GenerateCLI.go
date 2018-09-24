@@ -26,7 +26,7 @@ type CLIConfig struct {
 var platform = runtime.GOOS
 
 // GenerateCLI prints a console log interface of the top files passed in
-func GenerateCLI(config CLIConfig) {
+var GenerateCLI = func(config CLIConfig) {
 	// Configure CLI table
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"ID", "Bytes", "Path"})

@@ -7,7 +7,6 @@ import (
 )
 
 func walkDir(dir string, ignore string) {
-	defer wg.Done()
 	i := 1
 	visit := func(path string, f os.FileInfo, err error) error {
 		if len(ignore) > 0 {
@@ -18,15 +17,8 @@ func walkDir(dir string, ignore string) {
 				}
 			}
 		}
-		filesSync.Lock()
-		filesSync.files[i] = File{ID: i, Path: path, Size: f.Size()}
-		filesSync.Unlock()
+		fileMap[i] = File{ID: i, Path: path, Size: f.Size()}
 		i++
-		if f.IsDir() && path != dir {
-			wg.Add(1)
-			go walkDir(path, ignore)
-			return filepath.SkipDir
-		}
 		return nil
 	}
 
