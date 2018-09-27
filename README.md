@@ -14,6 +14,7 @@ $./storage-management-cli
 ## Initial Arguments
 
 Upon inital execution of the file, you can pass in these arguments:
+
 `root` - By default the tool uses the current directory. Use the `root` flag to define a custom directory.
 
 ```bash
